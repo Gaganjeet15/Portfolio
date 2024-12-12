@@ -31,6 +31,7 @@
             text-align: center;
             z-index: 1;
             mix-blend-mode: difference;
+            padding: 20px;
         }
         h1 {
             font-size: 5rem;
@@ -95,17 +96,22 @@
             h1 {
                 font-size: 3rem;
                 letter-spacing: 5px;
+                color: #ffffff;
+                text-shadow: 0 0 10px rgba(0, 255, 252, 0.8),
+                             0 0 20px rgba(252, 0, 255, 0.8);
             }
             p {
                 font-size: 1.2rem;
                 letter-spacing: 3px;
+                color: #ffffff;
+                text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
             }
             #content {
                 width: 90%;
-                padding: 20px;
-                background: rgba(0, 0, 0, 0.5);
-                border-radius: 15px;
                 mix-blend-mode: normal;
+                background: none;
+                border-radius: 0;
+                padding: 0;
             }
         }
 
@@ -124,11 +130,19 @@
         /* Touch device optimization */
         @media (hover: none) {
             #content {
-                background: rgba(0, 0, 0, 0.7);
-                padding: 20px;
-                border-radius: 15px;
+                background: none;
+                padding: 0;
+                border-radius: 0;
                 mix-blend-mode: normal;
-                backdrop-filter: blur(5px);
+            }
+            h1 {
+                text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5),
+                             0 0 15px rgba(0, 255, 252, 0.8),
+                             0 0 25px rgba(252, 0, 255, 0.8);
+            }
+            p {
+                text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5),
+                             0 0 10px rgba(255, 255, 255, 0.8);
             }
         }
     </style>
