@@ -89,6 +89,48 @@
                        drop-shadow(0 0 60px #fc00ff);
             }
         }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 3rem;
+                letter-spacing: 5px;
+            }
+            p {
+                font-size: 1.2rem;
+                letter-spacing: 3px;
+            }
+            #content {
+                width: 90%;
+                padding: 20px;
+                background: rgba(0, 0, 0, 0.5);
+                border-radius: 15px;
+                mix-blend-mode: normal;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2.2rem;
+                letter-spacing: 3px;
+            }
+            p {
+                font-size: 1rem;
+                letter-spacing: 2px;
+                margin-top: 0.5rem;
+            }
+        }
+
+        /* Touch device optimization */
+        @media (hover: none) {
+            #content {
+                background: rgba(0, 0, 0, 0.7);
+                padding: 20px;
+                border-radius: 15px;
+                mix-blend-mode: normal;
+                backdrop-filter: blur(5px);
+            }
+        }
     </style>
 </head>
 
@@ -208,6 +250,27 @@
                 camera.position.z = newIsMobile ? 70 : 50; // Move camera back on mobile
             }
         });
+
+        // Add touch event handling
+        document.addEventListener('touchmove', (event) => {
+            event.preventDefault();
+            const touch = event.touches[0];
+            mouseX = (touch.clientX - window.innerWidth / 2) * 0.05;  // Reduced sensitivity for mobile
+            mouseY = (touch.clientY - window.innerHeight / 2) * 0.05;
+        }, { passive: false });
+
+        // Prevent zoom on double tap
+        document.addEventListener('dblclick', (e) => {
+            e.preventDefault();
+        });
+
+        // Initial setup for mobile
+        if (window.innerWidth <= 768) {
+            camera.position.z = 70;  // Move camera back on mobile
+            shapes.forEach((shape, i) => {
+                shape.scale.set(0.7, 0.7, 0.7);  // Make shapes slightly smaller on mobile
+            });
+        }
     </script>
 </body>
 
