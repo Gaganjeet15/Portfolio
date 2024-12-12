@@ -3,141 +3,212 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Coming Soon - Gaganjeet.dev</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coming Soon - Portfolio</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(45deg, #121212, #1e1e1e);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            perspective: 1000px;
+            margin: 0;
             overflow: hidden;
-            padding: 20px;
+            font-family: 'Arial', sans-serif;
+            color: #fff;
+            background: #000;
         }
-
-        .scene {
-            width: 90vw;
-            /* Responsive width */
-            max-width: 300px;
-            /* Maximum width */
-            height: 50vh;
-            /* Responsive height */
-            max-height: 400px;
-            /* Maximum height */
-            position: relative;
-            transform-style: preserve-3d;
-            animation: rotate 20s infinite linear;
-        }
-
-        .card {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-            background: linear-gradient(135deg, #2c3e50, #3498db);
-            color: white;
-            text-align: center;
-            padding: 20px;
-            transform-origin: center;
-        }
-
-        .card-front {
-            transform: rotateY(0deg);
-        }
-
-        .card-back {
-            transform: rotateY(180deg);
-        }
-
-        .scene:hover .card-front {
-            transform: rotateY(-180deg);
-        }
-
-        .scene:hover .card-back {
-            transform: rotateY(0deg);
-        }
-
-        .title {
-            font-size: 2rem;
-            /* Responsive font size */
-            margin-bottom: 15px;
-            font-weight: bold;
-        }
-
-        .subtitle {
-            font-size: 0.9rem;
-            /* Responsive font size */
-            opacity: 0.8;
-            margin-bottom: 20px;
-        }
-
-        @keyframes rotate {
-            0% {
-                transform: rotateX(0deg) rotateY(0deg);
-            }
-
-            50% {
-                transform: rotateX(10deg) rotateY(20deg);
-            }
-
-            100% {
-                transform: rotateX(0deg) rotateY(360deg);
-            }
-        }
-
-        .overlay {
+        #canvas-container {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at center,
-                    rgba(0, 0, 0, 0) 0%,
-                    rgba(0, 0, 0, 0.3) 100%);
-            pointer-events: none;
-            z-index: 2;
+            z-index: 0;
+            background: linear-gradient(45deg, #000000, #1a0033);
         }
-
-        /* Smaller mobile devices */
-        @media (max-width: 375px) {
-            .title {
-                font-size: 1.5rem;
+        #content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 1;
+            mix-blend-mode: difference;
+        }
+        h1 {
+            font-size: 5rem;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 10px;
+            animation: glitch 2s infinite, neon 1.5s ease-in-out infinite alternate;
+            font-weight: 900;
+        }
+        p {
+            font-size: 1.5rem;
+            margin-top: 1rem;
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+        }
+        @keyframes glitch {
+            0% {
+                text-shadow: 0.05em 0 0 #00fffc, -0.03em -0.04em 0 #fc00ff,
+                            0.025em 0.04em 0 #fffc00;
             }
-
-            .subtitle {
-                font-size: 0.8rem;
+            15% {
+                text-shadow: 0.05em 0 0 #00fffc, -0.03em -0.04em 0 #fc00ff,
+                            0.025em 0.04em 0 #fffc00;
+            }
+            16% {
+                text-shadow: -0.05em -0.025em 0 #00fffc, 0.025em 0.035em 0 #fc00ff,
+                            -0.05em -0.05em 0 #fffc00;
+            }
+            49% {
+                text-shadow: -0.05em -0.025em 0 #00fffc, 0.025em 0.035em 0 #fc00ff,
+                            -0.05em -0.05em 0 #fffc00;
+            }
+            50% {
+                text-shadow: 0.05em 0.035em 0 #00fffc, 0.03em 0 0 #fc00ff,
+                            0 -0.04em 0 #fffc00;
+            }
+            99% {
+                text-shadow: 0.05em 0.035em 0 #00fffc, 0.03em 0 0 #fc00ff,
+                            0 -0.04em 0 #fffc00;
+            }
+            100% {
+                text-shadow: -0.05em 0 0 #00fffc, -0.025em -0.04em 0 #fc00ff,
+                            -0.04em -0.025em 0 #fffc00;
+            }
+        }
+        @keyframes neon {
+            from {
+                filter: drop-shadow(0 0 15px #fff) 
+                       drop-shadow(0 0 50px #00fffc) 
+                       drop-shadow(0 0 100px #fc00ff);
+            }
+            to {
+                filter: drop-shadow(0 0 5px #fff) 
+                       drop-shadow(0 0 20px #00fffc) 
+                       drop-shadow(0 0 60px #fc00ff);
             }
         }
     </style>
 </head>
 
 <body>
-    <div class="overlay"></div>
-    <div class="scene">
-        <div class="card card-front">
-            <h1 class="title">Coming Soon</h1>
-            <p class="subtitle">Something exciting is on its way!</p>
-        </div>
-        <div class="card card-back">
-            <h2 class="title">Stay Tuned</h2>
-            <p class="subtitle">Working on something amazing</p>
-        </div>
+    <div id="canvas-container"></div>
+    <div id="content">
+        <h1>Coming Soon</h1>
+        <p>Prepare to be amazed</p>
     </div>
+
+    <script>
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.getElementById('canvas-container').appendChild(renderer.domElement);
+
+        // Create multiple geometric shapes
+        const shapes = [];
+        const colors = [0x00fffc, 0xfc00ff, 0xfffc00];
+
+        // Create torus knots
+        for(let i = 0; i < 3; i++) {
+            const geometry = new THREE.TorusKnotGeometry(10, 3, 100, 16);
+            const material = new THREE.MeshPhongMaterial({
+                color: colors[i],
+                wireframe: true,
+                transparent: true,
+                opacity: 0.3,
+                side: THREE.DoubleSide
+            });
+            const torusKnot = new THREE.Mesh(geometry, material);
+            torusKnot.position.x = (i - 1) * 20;
+            shapes.push(torusKnot);
+            scene.add(torusKnot);
+        }
+
+        // Create particle system
+        const particlesGeometry = new THREE.BufferGeometry();
+        const isMobile = window.innerWidth <= 768;
+        const particlesCount = isMobile ? 2000 : 5000; // Reduce particles on mobile
+        const posArray = new Float32Array(particlesCount * 3);
+
+        for(let i = 0; i < particlesCount * 3; i++) {
+            posArray[i] = (Math.random() - 0.5) * (isMobile ? 150 : 200);
+        }
+        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+        
+        const particlesMaterial = new THREE.PointsMaterial({
+            size: isMobile ? 0.15 : 0.1,
+            color: 0xffffff,
+            transparent: true,
+            opacity: 0.8,
+            blending: THREE.AdditiveBlending
+        });
+        
+        const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+        scene.add(particlesMesh);
+
+        // Lighting
+        const lights = [];
+        for(let i = 0; i < 3; i++) {
+            const light = new THREE.PointLight(colors[i], 1, 100);
+            light.position.set((i - 1) * 20, 0, 20);
+            lights.push(light);
+            scene.add(light);
+        }
+        scene.add(new THREE.AmbientLight(0x404040));
+
+        camera.position.z = 50;
+
+        let mouseX = 0;
+        let mouseY = 0;
+
+        // Animation loop
+        function animate() {
+            requestAnimationFrame(animate);
+
+            // Rotate shapes
+            shapes.forEach((shape, i) => {
+                shape.rotation.x += 0.01;
+                shape.rotation.y += 0.02;
+                shape.position.y = Math.sin(Date.now() * 0.001 + i) * 5;
+            });
+
+            // Move particles
+            particlesMesh.rotation.y += 0.0005;
+            particlesMesh.rotation.x += 0.0002;
+
+            // Camera movement based on mouse
+            camera.position.x += (mouseX - camera.position.x) * 0.05;
+            camera.position.y += (-mouseY - camera.position.y) * 0.05;
+            camera.lookAt(scene.position);
+
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        // Interactive mouse movement
+        document.addEventListener('mousemove', (event) => {
+            mouseX = (event.clientX - window.innerWidth / 2) * 0.1;
+            mouseY = (event.clientY - window.innerHeight / 2) * 0.1;
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            const wasMobile = isMobile;
+            const newIsMobile = window.innerWidth <= 768;
+            
+            // Update camera
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+
+            // Adjust camera position for mobile
+            if (newIsMobile !== wasMobile) {
+                camera.position.z = newIsMobile ? 70 : 50; // Move camera back on mobile
+            }
+        });
+    </script>
 </body>
 
 </html>
