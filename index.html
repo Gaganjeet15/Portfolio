@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Coming Soon - Gaganjeet.dev</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(45deg, #121212, #1e1e1e);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            perspective: 1000px;
+            overflow: hidden;
+            padding: 20px;
+        }
+
+        .scene {
+            width: 90vw;
+            /* Responsive width */
+            max-width: 300px;
+            /* Maximum width */
+            height: 50vh;
+            /* Responsive height */
+            max-height: 400px;
+            /* Maximum height */
+            position: relative;
+            transform-style: preserve-3d;
+            animation: rotate 20s infinite linear;
+        }
+
+        .card {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            transform-origin: center;
+        }
+
+        .card-front {
+            transform: rotateY(0deg);
+        }
+
+        .card-back {
+            transform: rotateY(180deg);
+        }
+
+        .scene:hover .card-front {
+            transform: rotateY(-180deg);
+        }
+
+        .scene:hover .card-back {
+            transform: rotateY(0deg);
+        }
+
+        .title {
+            font-size: 2rem;
+            /* Responsive font size */
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .subtitle {
+            font-size: 0.9rem;
+            /* Responsive font size */
+            opacity: 0.8;
+            margin-bottom: 20px;
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotateX(0deg) rotateY(0deg);
+            }
+
+            50% {
+                transform: rotateX(10deg) rotateY(20deg);
+            }
+
+            100% {
+                transform: rotateX(0deg) rotateY(360deg);
+            }
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center,
+                    rgba(0, 0, 0, 0) 0%,
+                    rgba(0, 0, 0, 0.3) 100%);
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        /* Smaller mobile devices */
+        @media (max-width: 375px) {
+            .title {
+                font-size: 1.5rem;
+            }
+
+            .subtitle {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="overlay"></div>
+    <div class="scene">
+        <div class="card card-front">
+            <h1 class="title">Coming Soon</h1>
+            <p class="subtitle">Something exciting is on its way!</p>
+        </div>
+        <div class="card card-back">
+            <h2 class="title">Stay Tuned</h2>
+            <p class="subtitle">Working on something amazing</p>
+        </div>
+    </div>
+</body>
+
+</html>
